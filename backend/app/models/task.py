@@ -1,24 +1,31 @@
-from sqlalchemy import Column, Integer, String, Date, Enum, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 from app.database import Base
 import enum
 
-class StatusEnum(str, enum.Enum):
+class TaskStatus(str, enum.Enum):
     pending = "Pending"
-    progress = "In Progress"
+    in_progress = "In Progress"
     completed = "Completed"
+
+class TaskPriority(str, enum.Enum):
+    low = "Low"
+    medium = "Medium"
+    high = "High"
 
 class Task(Base):
     __tablename__ = "tasks"
 
-    id = Column(Integer, primary_key=True)
-    title = Column(String(255))
-    priority = Column(String(50))
-    due_date = Column(Date)
-    status = Column(Enum(StatusEnum))
+    id = Column(Integer, primary_key=True, index=True)
 
+    title = Column(String(255), nullable=False)
+    description = Column(String(500), nullable=True) 
+    status = Column(Enum(TaskStatus), default=TaskStatus.pending)
+    priority = Column(Enum(TaskPriority), default=TaskPriority.medium)
+    due_date = Column(Date, nullable=True)
+    
     user_id = Column(Integer, ForeignKey("users.id"))
-    category_id = Column(Integer, ForeignKey("categories.id"))
+    category_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
 
-    owner = relationship("User", back_populates="tasks")
+    user = relationship("User", back_populates="tasks")
     category = relationship("Category", back_populates="tasks")
