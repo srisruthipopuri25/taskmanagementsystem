@@ -4,7 +4,7 @@ from app.database import Base, engine
 from app.models.user import User
 from app.models.task import Task
 from app.models.category import Category
-from app.routes import auth, tasks, categories
+from app.routes import auth, tasks, user, categories
 
 # Create FastAPI
 app = FastAPI()
@@ -26,4 +26,5 @@ Base.metadata.create_all(bind=engine)
 # routes
 app.include_router(auth.router)
 app.include_router(tasks.router)
+app.include_router(user.router)
 app.include_router(categories.router)
