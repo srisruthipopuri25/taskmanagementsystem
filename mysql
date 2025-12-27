@@ -6,7 +6,9 @@ sudo systemctl enable mysql
 sudo systemctl status mysql
 
 
-create user
+## create user
+mysql -u root -p
+
 CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
 
