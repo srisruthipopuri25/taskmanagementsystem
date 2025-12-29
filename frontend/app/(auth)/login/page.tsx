@@ -12,7 +12,7 @@ export default function LoginPage() {
   const handleLogin = async () => {
     try {
       await login(email, password);
-      router.push("/dashboard");
+      router.replace("/dashboard");
     } catch (err) {
       alert("Invalid email or password");
     }

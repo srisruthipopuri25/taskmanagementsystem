@@ -25,14 +25,20 @@ export default function Navbar() {
         shadow-sm
       "
     >
-      {/* Left */}
       <div className="flex gap-6">
         <Link href="/dashboard" className="hover:text-blue-600">
           Dashboard
         </Link>
+
         <Link href="/dashboard" className="hover:text-blue-600">
           Tasks
         </Link>
+
+       
+        <Link href="/categories" className="hover:text-blue-600">
+          Categories
+        </Link>
+
         <Link href="/profile" className="hover:text-blue-600">
           Profile
         </Link>
@@ -42,7 +48,7 @@ export default function Navbar() {
         className="text-xl font-semibold cursor-pointer"
         onClick={() => router.push("/dashboard")}
       >
-        📝 Task Manager
+         Task Manager
       </h1>
 
       <Button danger icon={<LogoutOutlined />} onClick={handleLogout}>
